@@ -9,3 +9,4 @@ class Prediction(BaseModel):
     id: Mapped[int] = mapped_column(primary_key=True)
     telegram_user_id: Mapped[int]
     text: Mapped[str]
+    is_approved: Mapped[bool]
