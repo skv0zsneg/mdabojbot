@@ -94,7 +94,7 @@ async def approve_prediction(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
 async def remove_prediction(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Delete prediction by admin."""
-    if not is_user_admin(update.effective_user.id):
+    if not await is_user_admin(update.effective_user.id):
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text="Тише, тише маленький. Эта кнопочка для взрослых дядек",
