@@ -108,7 +108,7 @@ async def remove_prediction(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         )
         return
 
-    if len(context.args) != 1 and not context.args[0].isdigit():
+    if len(context.args) != 1 or not context.args[0].isdigit():
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text="Смотри. ID - это одна строчка с циферками и ничего лишнего. Попробуй еще раз",
