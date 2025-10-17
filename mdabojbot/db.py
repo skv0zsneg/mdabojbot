@@ -27,7 +27,6 @@ def make_db_session(method):
 async def init_db(application: Application):
     # TODO: Maybe change to something beautiful?
     from mdabojbot.prediction.models import Prediction  # noqa
-    from mdabojbot.rank.models import Rank, UsersRanks  # noqa
     from mdabojbot.user.models import User  # noqa
 
     async with engine.begin() as conn:
