@@ -1,9 +1,10 @@
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from telegram.ext import Application
 
+from mdabojbot import utils
 from mdabojbot.common.models import BaseModel
 
-engine = create_async_engine("sqlite+aiosqlite:///mdabojbot.db", echo=True)
+engine = create_async_engine(f"sqlite+aiosqlite:///{utils.get_path_to_db()}", echo=True)
 
 async_session = async_sessionmaker(engine, expire_on_commit=False)
 
