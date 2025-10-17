@@ -48,11 +48,18 @@ async def add_prediction(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
 async def what_my_future(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Get random prediction for user."""
-    random_prediction = await get_random_prediction()
-    await context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=random_prediction.text,
-    )
+    try:
+        random_prediction = await get_random_prediction()
+    except ValueError:
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text="Надо же. Нет ни одного предсказания в базе :(",
+        )
+    else:
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=random_prediction.text,
+        )
 
 
 async def approve_prediction(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
