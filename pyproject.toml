@@ -15,7 +15,25 @@ dependencies = [
 ]
 
 [tool.poetry.scripts]
-demo-cli = "mdabojbot:main"
+run-bot = "mdabojbot.__main__:run"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.18.2"
+pytest = "^8.4.2"
+ruff = "^0.14.1"
+pytest-cov = "^7.0.0"
+pytest-xdist = "^3.8.0"
+
+[tool.pytest.ini_options]
+addopts = [
+    # pytest-cov
+    "--cov=mdabojbot/",
+    "--cov=tests/",
+    "--cov-report=html",
+    "--cov-fail-under=100",
+    # pytest-xdist
+    "-n=auto",
+]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
