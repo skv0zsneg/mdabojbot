@@ -31,7 +31,9 @@ async def get_unapproved_predictions(
 
 
 @make_db_session
-async def prediction_delete(prediction_id: int, session: AsyncSession = AsyncSession()) -> None:
+async def prediction_delete(
+    prediction_id: int, session: AsyncSession = AsyncSession()
+) -> None:
     query = select(Prediction).where(Prediction.id == prediction_id)
     result = await session.execute(query)
     prediction_to_delete = result.scalar_one_or_none()
@@ -43,7 +45,12 @@ async def prediction_delete(prediction_id: int, session: AsyncSession = AsyncSes
 
 @make_db_session
 async def get_random_prediction(session: AsyncSession = AsyncSession()) -> Prediction:
-    query = select(Prediction).where(Prediction.is_approved).order_by(func.random()).limit(1)
+    query = (
+        select(Prediction)
+        .where(Prediction.is_approved)
+        .order_by(func.random())
+        .limit(1)
+    )
     result = await session.execute(query)
     random_prediction = result.scalar_one_or_none()
     if not random_prediction:

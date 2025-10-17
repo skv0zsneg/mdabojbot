@@ -62,7 +62,9 @@ async def what_my_future(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         )
 
 
-async def approve_prediction(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def approve_prediction(
+    update: Update, context: ContextTypes.DEFAULT_TYPE
+) -> None:
     """Approve prediction by admin."""
     if not is_user_admin(update.effective_user.id):
         await context.bot.send_message(
@@ -136,7 +138,9 @@ async def remove_prediction(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         )
 
 
-async def list_unapproved_predictions(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def list_unapproved_predictions(
+    update: Update, context: ContextTypes.DEFAULT_TYPE
+) -> None:
     """List only unapproved predictions for admin."""
     if not is_user_admin(update.effective_user.id):
         await context.bot.send_message(
