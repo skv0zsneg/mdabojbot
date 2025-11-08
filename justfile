@@ -19,12 +19,12 @@ run-bot:
 [doc("Run unit tests")]
 [group("tests")]
 unit-tests:
-  poetry run pytest tests/*
+  poetry run pytest -vv tests
 
 [doc("Run mypy checks")]
 [group("tests")]
 mypy-checks:
-  poetry run mypy {{botname}}/*
+  poetry run mypy {{botname}}
 
 [doc("Run ruff checks")]
 [group("tests")]
