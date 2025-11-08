@@ -1,4 +1,4 @@
-name: All checks
+name: Test All
 
 on:
   push:
@@ -33,5 +33,5 @@ jobs:
           poetry config virtualenvs.in-project true
           poetry run pip install -U pip
           poetry install
-      - name: Run type and lint checks
-        run: make typing lint
+      - name: Test All
+        run: just test-all
