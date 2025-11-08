@@ -27,4 +27,8 @@ async def is_user_admin(
 ) -> bool:
     query = select(User).where(User.telegram_user_id == telegram_user_id)
     result = await session.execute(query)
-    return bool(result.scalar_one_or_none())
+    user = result.scalar_one_or_none()
+    if not user:
+        raise ValueError(f"There is not user with id={telegram_user_id}")
+
+    return user.group == UserGroup.ADMIN
