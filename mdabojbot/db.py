@@ -44,6 +44,8 @@ async def init_db(application: Application):
         result = await session.execute(query)
         existing_superuser = result.scalar_one_or_none()
         if not existing_superuser:
-            new_superuser = User(telegram_user_id=superuser_telegram_id, group=UserGroup.ADMIN)
+            new_superuser = User(
+                telegram_user_id=superuser_telegram_id, group=UserGroup.ADMIN
+            )
             session.add(new_superuser)
             await session.commit()
