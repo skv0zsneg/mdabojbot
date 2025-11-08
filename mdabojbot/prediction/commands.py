@@ -13,6 +13,11 @@ from mdabojbot.user.service import get_random_admin, is_user_admin
 
 async def add_prediction(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Save prediction from user."""
+    if not update.effective_chat:
+        raise RuntimeError("This update has no chat associated with it.")
+    if not update.effective_user:
+        raise RuntimeError("This update has no user associated with it.")
+
     if not context.args:
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
@@ -48,6 +53,9 @@ async def add_prediction(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
 async def what_my_future(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Get random prediction for user."""
+    if not update.effective_chat:
+        raise RuntimeError("This update has no chat associated with it.")
+
     try:
         random_prediction = await get_random_prediction()
     except ValueError:
@@ -66,6 +74,11 @@ async def approve_prediction(
     update: Update, context: ContextTypes.DEFAULT_TYPE
 ) -> None:
     """Approve prediction by admin."""
+    if not update.effective_chat:
+        raise RuntimeError("This update has no chat associated with it.")
+    if not update.effective_user:
+        raise RuntimeError("This update has no user associated with it.")
+
     if not is_user_admin(update.effective_user.id):
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
@@ -103,6 +116,11 @@ async def approve_prediction(
 
 async def remove_prediction(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Delete prediction by admin."""
+    if not update.effective_chat:
+        raise RuntimeError("This update has no chat associated with it.")
+    if not update.effective_user:
+        raise RuntimeError("This update has no user associated with it.")
+
     if not await is_user_admin(update.effective_user.id):
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
@@ -142,6 +160,11 @@ async def list_unapproved_predictions(
     update: Update, context: ContextTypes.DEFAULT_TYPE
 ) -> None:
     """List only unapproved predictions for admin."""
+    if not update.effective_chat:
+        raise RuntimeError("This update has no chat associated with it.")
+    if not update.effective_user:
+        raise RuntimeError("This update has no user associated with it.")
+
     if not is_user_admin(update.effective_user.id):
         await context.bot.send_message(
             chat_id=update.effective_chat.id,

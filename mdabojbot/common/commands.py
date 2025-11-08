@@ -6,6 +6,9 @@ from telegram.ext import ContextTypes, MessageHandler, filters
 
 
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not update.effective_chat:
+        raise RuntimeError("This update has no chat associated with it.")
+
     if update.effective_chat.type != ChatType.PRIVATE:
         return
 
