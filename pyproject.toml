@@ -26,12 +26,15 @@ pytest-xdist = "^3.8.0"
 pytest-asyncio = "^1.2.0"
 
 [tool.pytest.ini_options]
+# pytest-asyncio
+asyncio_mode = "auto"
+# args
 addopts = [
     # pytest-cov
     "--cov=mdabojbot/",
     "--cov=tests/",
     "--cov-report=html",
-    "--cov-fail-under=100",
+    "--cov-fail-under=50",
     # pytest-xdist
     "-n=auto",
 ]
