@@ -1,4 +1,4 @@
-from mdabojbot.run import run
+from mdabojbot.bot import run
 
 if __name__ == "__main__":
     run()
