@@ -1,6 +1,6 @@
 [project]
 name = "mdabojbot"
-version = "0.1.0"
+version = "0.1.1"
 description = "Тот самый токсичный бот в телеграм группе."
 authors = [
     {name = "skv0zsneg",email = "klimentlamonov@yandex.ru"}
@@ -15,7 +15,7 @@ dependencies = [
 ]
 
 [tool.poetry.scripts]
-run-bot = "mdabojbot.__main__:run"
+mdabojbot = "mdabojbot.__main__:run"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.18.2"
