@@ -5,6 +5,13 @@
 Формат основан на [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 Проект придерживается [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.1.2-beta
+
+### Исправлено
+
+- Проверка на админа пользователя теперь не падает, если по данному ID пользователя нет.
+
+
 ## 0.1.1-beta
 
 ### Исправлено

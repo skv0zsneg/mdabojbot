@@ -29,6 +29,6 @@ async def is_user_admin(
     result = await session.execute(query)
     user = result.scalar_one_or_none()
     if not user:
-        raise ValueError(f"There is not user with id={telegram_user_id}")
+        return False
 
     return user.group == UserGroup.ADMIN

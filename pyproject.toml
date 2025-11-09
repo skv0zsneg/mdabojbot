@@ -1,6 +1,6 @@
 [project]
 name = "mdabojbot"
-version = "0.1.0"
+version = "0.1.2"
 description = "Тот самый токсичный бот в телеграм группе."
 authors = [
     {name = "skv0zsneg",email = "klimentlamonov@yandex.ru"}
