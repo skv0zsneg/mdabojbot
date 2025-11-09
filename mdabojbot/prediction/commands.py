@@ -1,5 +1,6 @@
 from telegram import Update
 from telegram.ext import CommandHandler, ContextTypes
+from telegram.helpers import escape_markdown
 
 from mdabojbot.prediction.service import (
     create_prediction,
@@ -27,17 +28,21 @@ async def add_prediction(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
     new_prediction = await create_prediction(
         telegram_user_id=update.effective_user.id,
-        prediction_text="\n".join(context.args),
+        prediction_text=" ".join(context.args),
     )
     random_admin = await get_random_admin()
     admin_chat = await context.bot.get_chat(random_admin.telegram_user_id)
 
+    username = update.effective_user.first_name
+    if update.effective_user.username:
+        username += f" @{escape_markdown(update.effective_user.username, version=2)}"
+
     await context.bot.send_message(
         chat_id=admin_chat.id,
         text=(
-            f"Пользователь: @{update.effective_user.username}\n"
+            f"Пользователь: {escape_markdown(username, version=2)}\n"
             f"Предлагает предсказание с ID `{new_prediction.id}`\n"
-            f"{new_prediction.text}"
+            f"`{escape_markdown(new_prediction.text, version=2)}`"
         ),
         parse_mode="MarkdownV2",
     )
@@ -110,7 +115,11 @@ async def approve_prediction(
     else:
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text=f"Предсказание '{approved_prediction.text}' апрувнуто!",
+            text=(
+                f"Предсказание `{escape_markdown(approved_prediction.text, version=2)}` "
+                f"апрувнуто"
+            ),
+            parse_mode="MarkdownV2",
         )
 
 
@@ -175,7 +184,9 @@ async def list_unapproved_predictions(
     unapproved_predictions = await get_unapproved_predictions()
     list_of_text = []
     for prediction in unapproved_predictions:
-        list_of_text.append(f"\nID: `{prediction.id}`\nТекст: '{prediction.text}'")
+        list_of_text.append(
+            f"\nID: `{prediction.id}`\nТекст: `{escape_markdown(prediction.text, version=2)}`"
+        )
 
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
