@@ -115,7 +115,11 @@ async def approve_prediction(
     else:
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
-            text=f"Предсказание '{approved_prediction.text}' апрувнуто!",
+            text=(
+                f"Предсказание `{escape_markdown(approved_prediction.text, version=2)}` "
+                f"апрувнуто"
+            ),
+            parse_mode="MarkdownV2",
         )
 
 
