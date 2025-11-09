@@ -27,17 +27,21 @@ async def add_prediction(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
     new_prediction = await create_prediction(
         telegram_user_id=update.effective_user.id,
-        prediction_text="\n".join(context.args),
+        prediction_text=" ".join(context.args),
     )
     random_admin = await get_random_admin()
     admin_chat = await context.bot.get_chat(random_admin.telegram_user_id)
 
+    username = update.effective_user.first_name
+    if update.effective_user.username:
+        username += f" @{update.effective_user.username}"
+
     await context.bot.send_message(
         chat_id=admin_chat.id,
         text=(
-            f"Пользователь: @{update.effective_user.username}\n"
+            f"Пользователь: {username}\n"
             f"Предлагает предсказание с ID `{new_prediction.id}`\n"
-            f"{new_prediction.text}"
+            f"`{new_prediction.text}`"
         ),
         parse_mode="MarkdownV2",
     )
