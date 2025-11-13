@@ -84,7 +84,7 @@ async def approve_prediction(
     if not update.effective_user:
         raise RuntimeError("This update has no user associated with it.")
 
-    if not is_user_admin(update.effective_user.id):
+    if not await is_user_admin(update.effective_user.id):
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text="Тише, тише маленький. Эта кнопочка для взрослых дядек",
@@ -174,7 +174,7 @@ async def list_unapproved_predictions(
     if not update.effective_user:
         raise RuntimeError("This update has no user associated with it.")
 
-    if not is_user_admin(update.effective_user.id):
+    if not await is_user_admin(update.effective_user.id):
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text="Тише, тише маленький. Эта кнопочка для взрослых дядек",
